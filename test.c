@@ -2,8 +2,8 @@
 #include <string.h>
 #include "PPMManager.h"
 
-#define HEIGHT        300
-#define WIDTH         300
+#define HEIGHT 300
+#define WIDTH  300
 
 void CreateGrayscaleImage();
 void CreateCheckeredImage();
@@ -60,6 +60,7 @@ void CreateCircleImage(){
     DrawBackground(&c, WHITE);
     DrawCrircle(&c, width/2, height/2, height/4, RED);
     MakePPM("./TestImages/circle.ppm", &c);
+    DestroyCanvas(&c);
 }
 
 void TestImages(){

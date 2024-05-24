@@ -1,7 +1,7 @@
 #include "PPMManager.h"
 
-#define HEIGHT        300
-#define WIDTH         300
+#define HEIGHT  300
+#define WIDTH   300
 
 int main(){
     struct canvas c;

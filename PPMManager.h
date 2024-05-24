@@ -50,7 +50,7 @@ void GrayScaleImage(struct canvas* canvas);
 //create datatypes for using header file
 void CreateCanvas(struct canvas* canvas, const int width, const int height, const int maxColor);
 void CreateCanvasWithPixels(struct canvas* canvas, const int width, const int height, const int maxColor, struct pixel* pixels);
-void DestroyCanvas(struct canvas* canvas);  //only use if you used CreateCanvas
+void DestroyCanvas(struct canvas* canvas);  
 void MakePPM(char* OutputFileName, struct canvas* canvas);
 void WritePPMHeader(FILE* file, struct PPMHeader* header);
 void ReadPPM(const char* FilePath, struct canvas* canvas);
@@ -267,18 +267,25 @@ void CreateCanvas(struct canvas* canvas, const int width, const int height, cons
 }
 
 void CreateCanvasWithPixels(struct canvas* canvas, const int width, const int height, const int maxColor, struct pixel* pixels){
-    //strcpy(canvas->header.magicNum, "P6");
     canvas->header.magicNum[0] = 'P';
     canvas->header.magicNum[1] = '6';
     canvas->header.magicNum[2] = '\0';
     canvas->header.width = width;
     canvas->header.height = height;
     canvas->header.maxColor = maxColor;
+    canvas->pixels = malloc(sizeof(struct pixel)*width*height);
     canvas->pixels = pixels;
 }
 
-//only to be used with CreateCanvas
 void DestroyCanvas(struct canvas* canvas){
     free(canvas->pixels);
 }
+
 #endif
+
+
+// TODOS:
+// Triangles with 3 points
+// More filters
+// Rotate Image
+// 
