@@ -54,8 +54,8 @@ int main(){
     CreateCanvas(&c, WIDTH, HEIGHT, MAX_COLOR);
     DrawBackground(&c, WHITE);
     CreateRandomCoordinates(WIDTH, HEIGHT);
-    CreatePoints(c);
     FillVoronoi(c);
+    CreatePoints(c);
     //PrintVoronoiPoints();
     MakePPM("voronoi.ppm", &c);
     DestroyCanvas(&c);
@@ -96,23 +96,15 @@ void FillVoronoi(struct canvas c){
 
 
     for(int i = 0; i < c.header.height*c.header.width; i++){
-
-        if (ComparePixel(circlePixel, c.pixels[i])){
-            continue;
-        }
-
-        else{
-            for(int n = 0; n < N; n++){
-                d = Distance(i%c.header.width,(int)i/c.header.height, voronoi_points[n].x, voronoi_points[n].y);
-                if (d < leastDistance){
-                    leastDistance = d;
-                    leastDistanceIndex = n;
-                }
+        for(int n = 0; n < N; n++){
+            d = Distance(i%c.header.width,(int)i/c.header.height, voronoi_points[n].x, voronoi_points[n].y);
+            if (d < leastDistance){
+                leastDistance = d;
+                leastDistanceIndex = n;
             }
-            
-            leastDistance = INT_MAX;
-            ConvertColorToPixel(colors[leastDistanceIndex], &c.pixels[i]);
         }
+        leastDistance = INT_MAX;
+        ConvertColorToPixel(colors[leastDistanceIndex], &c.pixels[i]);
     }
 }
 
