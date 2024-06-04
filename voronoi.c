@@ -43,15 +43,14 @@ struct point voronoi_points[N] = {0};
 
 void CreateRandomCoordinates(int w, int h);
 void PrintVoronoiPoints();
-void CreatePoints(struct canvas c);
-void FillVoronoi(struct canvas c);
-bool ComparePixel(struct pixel p1, struct pixel p2);
+void CreatePoints(canvas c);
+void FillVoronoi(canvas c);
+bool ComparePixel(pixel p1, pixel p2);
 float Distance(int x1, int y1, int x2, int y2);
 
 int main(){
     srand(198);
-    struct canvas c;
-    CreateCanvas(&c, WIDTH, HEIGHT, MAX_COLOR);
+    canvas c = CreateCanvas(WIDTH, HEIGHT, MAX_COLOR);
     DrawBackground(&c, WHITE);
     CreateRandomCoordinates(WIDTH, HEIGHT);
     FillVoronoi(c);
@@ -73,7 +72,7 @@ void CreateRandomCoordinates(int w, int h){
     }
 }
 
-void CreatePoints(struct canvas c){
+void CreatePoints(canvas c){
     for(int i = 0; i < N; i++){
         DrawCrircle(&c, voronoi_points[i].x, voronoi_points[i].y,5,POINT_COLOR);
     }
@@ -86,12 +85,12 @@ void PrintVoronoiPoints(){
 }
 
 
-void FillVoronoi(struct canvas c){
+void FillVoronoi(canvas c){
     int leastDistanceIndex = 0;
     float leastDistance = INT_MAX;
     float d;
 
-    struct pixel circlePixel;
+    pixel circlePixel;
     ConvertColorToPixel(POINT_COLOR, &circlePixel);
 
 
@@ -109,7 +108,7 @@ void FillVoronoi(struct canvas c){
 }
 
 
-bool ComparePixel(struct pixel p1, struct pixel p2){
+bool ComparePixel(pixel p1, pixel p2){
     if (p1.r != p2.r) return false;
     if (p1.g != p2.g) return false;
     if (p1.b != p2.b) return false;

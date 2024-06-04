@@ -4,8 +4,7 @@
 #define WIDTH   300
 
 int main(){
-    struct canvas c;
-    CreateCanvas(&c, WIDTH, HEIGHT, MAX_COLOR);
+    canvas c = CreateCanvas(WIDTH, HEIGHT, MAX_COLOR);
     DrawBackground(&c, BLUE);
     DrawTriangle(&c, WIDTH/3,HEIGHT/3,100, YELLOW);
     DrawCrircle(&c, HEIGHT/2, WIDTH/2, 50, GREEN);
