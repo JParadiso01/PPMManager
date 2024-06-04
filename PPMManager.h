@@ -128,14 +128,25 @@ void DrawHorizontalLine(struct canvas* canvas, int row, uint32_t color){
 
 void DrawLine(struct canvas* canvas, int x1, int y1, int x2, int y2, uint32_t color){
     //y = mx + b
-
+    int temp;
     int dy = y2 - y1;
     int dx = x2 - x1;
     int b = y1/(((dy/dx)*x1)+1);
     struct pixel p;
+    
     ConvertColorToPixel(color, &p);
-    for (int x = 0; x < canvas->header.width; x++){
-        for (int y = 0; y < canvas->header.height; y++){
+    if (x1 > x2){
+        temp = x2;
+        x2 = x1;
+        x1 = temp;
+    }
+    if (y1 > y2){
+        temp = y2;
+        y2 = y1;
+        y1 = temp;
+    }
+    for (int x = x1; x < x2; x++){
+        for (int y = y1; y < y2; y++){
             if (y == (((dy/dx)*x)+b)){
                 canvas->pixels[(canvas->header.height*y)+x] = p;
             }
